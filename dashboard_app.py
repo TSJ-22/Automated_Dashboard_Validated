@@ -1,12 +1,17 @@
-import streamlit as st
-import pandas as pd
+import streamlit as stimport streamlit
+import os
 
 st.title("📊 Revenue Forecast Dashboard")
 
-df = pd.read_csv("predictions/predictions.csv")
+file_path = "predictions/predictions.csv"
 
-st.subheader("Latest Prediction")
-st.metric("Predicted Revenue", int(df.iloc[-1]["Predicted"]))
+if os.path.exists(file_path):
+    df = pd.read_csv(file_path)
 
-st.subheader("Actual vs Predicted")
-st.line_chart(df[["Actual","Predicted"]])
+    st.subheader("Latest Prediction")
+    st.metric("Predicted Revenue", int(df.iloc[-1]["Predicted"]))
+
+    st.subheader("Trend (Actual vs Predicted)")
+    st.line_chart(df[["Actual","Predicted"]])
+else:
+    st.warning("No prediction data available. Please run pipeline.")
