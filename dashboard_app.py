@@ -46,7 +46,7 @@ else:
     st.line_chart(df_demo[["Actual", "Predicted"]])
 
     st.dataframe(df_demo.tail())
-``
+    
 import pandas as pd
 import numpy as np
 import os
