@@ -1,4 +1,4 @@
-import streamlit as stimport streamlit
+import streamlit as stimport streamlit as st pd
 import os
 
 st.title("📊 Revenue Forecast Dashboard")
@@ -11,7 +11,8 @@ if os.path.exists(file_path):
     st.subheader("Latest Prediction")
     st.metric("Predicted Revenue", int(df.iloc[-1]["Predicted"]))
 
-    st.subheader("Trend (Actual vs Predicted)")
-    st.line_chart(df[["Actual","Predicted"]])
+    st.subheader("Actual vs Predicted Trend")
+    st.line_chart(df[["Actual", "Predicted"]])
+
 else:
-    st.warning("No prediction data available. Please run pipeline.")
+    st.warning("⚠ No prediction data found. Please run pipeline.")
