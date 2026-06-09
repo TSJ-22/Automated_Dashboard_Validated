@@ -1,20 +1,20 @@
 import streamlit as st
 import pandas as pd
 import os
-
 st.title("📊 Revenue Forecast Dashboard")
 
-file_path = "predictions/predictions.csv"
+# ✅ Upload CSV
+uploaded_file = st.file_uploader("Upload CSV File", type=["csv"])
 
-if os.path.exists(file_path):
+if uploaded_file is not None:
+    df = pd.read_csv(uploaded_file)
 
-    df = pd.read_csv(file_path)
+    st.write("✅ Uploaded Data Preview")
+    st.dataframe(df.head())
 
-    st.subheader("Latest Prediction")
-    st.metric("Predicted Revenue", int(df.iloc[-1]["Predicted"]))
-
-    st.subheader("Actual vs Predicted Trend")
-    st.line_chart(df[["Actual", "Predicted"]])
+    # Example: show chart
+    if "Revenue_INR" in df.columns:
+        st.line_chart(df["Revenue_INR"])
 
 else:
-    st.warning("⚠ No prediction data found. Run pipeline first.")
+    st.info("Upload a CSV file to begin")
