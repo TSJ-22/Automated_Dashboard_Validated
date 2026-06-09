@@ -1,4 +1,5 @@
-import streamlit as stimport streamlit as st pd
+import streamlit as st
+import pandas as pd
 import os
 
 st.title("📊 Revenue Forecast Dashboard")
@@ -6,6 +7,7 @@ st.title("📊 Revenue Forecast Dashboard")
 file_path = "predictions/predictions.csv"
 
 if os.path.exists(file_path):
+
     df = pd.read_csv(file_path)
 
     st.subheader("Latest Prediction")
@@ -15,4 +17,4 @@ if os.path.exists(file_path):
     st.line_chart(df[["Actual", "Predicted"]])
 
 else:
-    st.warning("⚠ No prediction data found. Please run pipeline.")
+    st.warning("⚠ No prediction data found. Run pipeline first.")
